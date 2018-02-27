@@ -7,70 +7,62 @@ let messageNum = [];
 
 let num = 1;
 
-let d = "";
-let n = "";
+let del = "";
+let number = "";
 let w = "";
 
 
-// on enter keypress
-let enter = function (event) {
-    console.log("func js and enter are here");
-    if (event.keycode === 13) {
-        messageJS.messageSubmit();
+let msgCount = function () {
+    if (num < 10) {
+        number = num.toString();
+
+        w = "textbubble_0" + number;
+        del = "delete_0" + number;
     }
+    else {
+        number = num.toString();
+
+        w = "textbubble_" + number;
+        del = "delete_" + number;
+    }
+
+
+    console.log("id", number);
+
+    document.getElementById("textbubble").id = w;
+    document.getElementById("delete").id = del;
+
+
+
+    num = num + 1;
+
 };
 
-// let msgCount = function () {
-//     if (num < 10) {
-//         n = num.toString();
+document.querySelector('body').addEventListener('click', function (event) {
+    if (event.target.tagName.toLowerCase() === 'button') {
 
-//         w = "textbubble_0" + n;
-//         d = "delete_0" + n;
-//     }
-//     else {
-//         n = num.toString();
+        let bttn = event.target;
+        let bttnId = event.target.id;
 
-//         w = "textbubble_" + n;
-//         d = "delete_" + n;
-//     }
+        if (bttn.className === "delete" || bttn.className === "deleteDark" || bttn.className === "delete-lg") {
+            let dCompare = bttnId.slice(7, 10);
 
+            let mCompare = ("textbubble_" + dCompare);
 
-//     console.log("id", n);
+            let currentMsg = document.getElementById(mCompare);
+            let msgContents = document.getElementById(mCompare).childNodes[0].childNodes[0].innerHTML;
 
-//     document.getElementById("textbubble").id = w;
-//     document.getElementById("delete").id = d;
+            currentMsg.innerHTML = "";
 
+            let msgArray = cardMessagesJS.messages;
 
+            let m = msgArray.indexOf(msgContents);
 
-//     num = num + 1;
+            cardMessagesJS.messages.splice(m, 1);
+            document.getElementById(mCompare).removeAttribute("class");
 
-// };
+        }
+    }
+});    
 
-// document.querySelector('body').addEventListener('click', function (event) {
-//     if (event.target.tagName.toLowerCase() === 'button') {
-
-//         let bttn = event.target;
-//         let bttnId = event.target.id;
-
-//         if (bttn.className === "delete" || bttn.className === "deleteDark" || bttn.className === "delete-lg") {
-//             let dCompare = bttnId.slice(7, 10);
-
-//             let mCompare = ("textbubble_" + dCompare);
-
-//             let currentMsg = document.getElementById(mCompare);
-//             let msgContents = document.getElementById(mCompare).childNodes[0].childNodes[0].innerHTML;
-
-//             currentMsg.innerHTML = "";
-
-//             let msgArray = cardMessagesJS.messages;
-
-//             let m = msgArray.indexOf(msgContents);
-
-//             cardMessagesJS.messages.splice(m, 1);
-//             document.getElementById(mCompare).removeAttribute("class");
-
-//         }
-//     }
-// });    
-
-module.exports = {enter};
+module.exports = {msgCount};
