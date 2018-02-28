@@ -1,5 +1,4 @@
 "use strict";
-console.log("cards js is hisssere");
 
 let messageJS = require("./message");
 let funcJS = require("./function");

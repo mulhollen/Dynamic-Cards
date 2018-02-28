@@ -44,7 +44,7 @@ document.querySelector('body').addEventListener('click', function (event) {
         let bttn = event.target;
         let bttnId = event.target.id;
 
-        if (bttn.className === "delete" || bttn.className === "deleteDark" || bttn.className === "delete-lg") {
+        if (bttn.className === "delete") {
             let dCompare = bttnId.slice(7, 10);
 
             let mCompare = ("textbubble_" + dCompare);
